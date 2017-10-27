@@ -69,6 +69,17 @@ if ( is_plugin_active('gravityforms/gravityforms.php') ) {
 
 	}
 
+} else {
+
+	function pls_activate_gforms() {
+	    ?>
+	    <div class="error notice">
+	        <p><?php _e( 'Por favor, instale ou ative o Gravity Forms!', 'my_plugin_textdomain' ); ?></p>
+	    </div>
+	    <?php
+	}
+	
+	add_action( 'admin_notices', 'pls_activate_gforms' );
 }
 
 
