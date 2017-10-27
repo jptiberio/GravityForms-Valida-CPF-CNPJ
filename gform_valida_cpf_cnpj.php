@@ -11,10 +11,10 @@
 require 'class-valida-cpf-cnpj.php';
 
 
-if ( is_plugin_active('advanced-custom-fields-pro/acf.php') ) {
+if ( is_plugin_active('gravityforms/gravityforms.php') ) {
 
 
-add_filter("gform_validation", "custom_validation");
+	add_filter("gform_validation", "custom_validation");
 
 
 	function custom_validation( $validation_result){
