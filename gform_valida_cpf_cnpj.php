@@ -8,8 +8,9 @@
  *
  */
 
-require 'class-valida-cpf-cnpj.php';
+include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
+require 'class-valida-cpf-cnpj.php';
 
 if ( is_plugin_active('gravityforms/gravityforms.php') ) {
 
