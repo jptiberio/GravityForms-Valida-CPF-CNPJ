@@ -25,7 +25,7 @@ if ( is_plugin_active('gravityforms/gravityforms.php') ) {
 		foreach( $form['fields'] as $field ) {
 
 
-			if ( $field->cssClass == 'cpf_cnpj' ) {
+			if ( strpos($field->cssClass, 'cpf_cnpj') !== false ) {
 
 				$field_value = rgpost( 'input_'.$field->id );
 
