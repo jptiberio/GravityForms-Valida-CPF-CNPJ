@@ -10,7 +10,7 @@
 
 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
-require 'class-valida-cpf-cnpj.php';
+require 'ValidaCPFCNPJ.php';
 
 if ( is_plugin_active('gravityforms/gravityforms.php') ) {
 
