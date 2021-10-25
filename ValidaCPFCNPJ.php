@@ -15,6 +15,12 @@ class ValidaCPFCNPJ
 		
 		// Garante que o valor é uma string
 		$this->valor = (string)$this->valor;
+
+		$this->valores_invalidos = [
+			11111111111,
+			00000000000,
+			00000000000000
+		];
 	}
 
 	/**
@@ -112,6 +118,11 @@ class ValidaCPFCNPJ
 		// Faz o cálculo dos 10 dígitos do CPF para obter o último dígito
 		$novo_cpf = $this->calc_digitos_posicoes( $novo_cpf, 11 );
 
+		//valida se está no array de números inválidos
+		if(in_array($this->valor, $this->valores_invalidos)){
+			return false;
+		}
+
 		// Verifica se o novo CPF gerado é idêntico ao CPF enviado
 		if ( $novo_cpf === $this->valor ) {
 			// CPF válido
@@ -145,6 +156,11 @@ class ValidaCPFCNPJ
 
 		// Concatena o segundo dígito ao CNPJ
 		$cnpj = $segundo_calculo;
+
+		//valida se está no array de números inválidos
+		if(in_array($this->valor, $this->valores_invalidos)){
+			return false;
+		}
 
 		// Verifica se o CNPJ gerado é idêntico ao enviado
 		if ( $cnpj === $cnpj_original ) {
