@@ -22,9 +22,15 @@ if ( is_plugin_active('gravityforms/gravityforms.php') ) {
 
 		$form = $validation_result['form'];
 
+		$classes = [
+			'valida_cpf' => 'CPF inválido',
+			'valida_cnpj' => 'CNPJ inválido',
+			'valida_cpf_cnpj' => 'CPF ou CNPJ inválido'
+		];
+
 		foreach( $form['fields'] as $field ) {
 
-			if ( strpos($field->cssClass, 'cpf_cnpj') !== false ) {
+			if ( array_key_exists($field->cssClass, $classes) !== false ) {
 
 				$field_value = rgpost( 'input_'.$field->id );
 				$cpf_cnpj = new ValidaCPFCNPJ($field_value);
@@ -34,7 +40,7 @@ if ( is_plugin_active('gravityforms/gravityforms.php') ) {
 					$validado = $cpf_cnpj->valida();
 
 					if ( $validado != true ) {
-			            $field->validation_message = 'CPF/CNPJ Inválido';
+			            $field->validation_message = $classes[$field->cssClass];
 			        	$validation_result['is_valid'] = false;
 			            $field->failed_validation = true;
 			            break;
@@ -42,7 +48,7 @@ if ( is_plugin_active('gravityforms/gravityforms.php') ) {
 
 				} else {
 
-		            $field->validation_message = 'CPF/CNPJ Inválido';
+		            $field->validation_message = $classes[$field->cssClass];
 		        	$validation_result['is_valid'] = false;
 		            $field->failed_validation = true;
 		            break;
