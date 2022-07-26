@@ -31,30 +31,31 @@ if ( is_plugin_active('gravityforms/gravityforms.php') ) {
 		foreach( $form['fields'] as $field ) {
 
 			if ( array_key_exists($field->cssClass, $classes) !== false ) {
-
 				$field_value = rgpost( 'input_'.$field->id );
-				$cpf_cnpj = new ValidaCPFCNPJ($field_value);
+				
+				if ( !empty($field_value) ){
+					$cpf_cnpj = new ValidaCPFCNPJ($field_value);
 
-				if (!empty($cpf_cnpj)) {
+					if (!empty($cpf_cnpj)) {
 
-					$validado = $cpf_cnpj->valida();
+						$validado = $cpf_cnpj->valida();
 
-					if ( $validado != true ) {
-			            $field->validation_message = $classes[$field->cssClass];
-			        	$validation_result['is_valid'] = false;
-			            $field->failed_validation = true;
-			            break;
+						if ( $validado != true ) {
+							$field->validation_message = $classes[$field->cssClass];
+							$validation_result['is_valid'] = false;
+							$field->failed_validation = true;
+							break;
+						}
+
+					} else {
+
+						$field->validation_message = $classes[$field->cssClass];
+						$validation_result['is_valid'] = false;
+						$field->failed_validation = true;
+						break;
+
 					}
-
-				} else {
-
-		            $field->validation_message = $classes[$field->cssClass];
-		        	$validation_result['is_valid'] = false;
-		            $field->failed_validation = true;
-		            break;
-
 				}
-			    
 			}
 
 	    }
